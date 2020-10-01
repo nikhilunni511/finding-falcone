@@ -1,0 +1,29 @@
+.box-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    place-items: center;
+    width: 75vw;
+    margin: 10px auto 50px auto;
+}
+
+.planet-container p{
+    text-align: center;
+}
+
+@media only screen and (max-width: 800px) {
+    .box-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+    .box-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        place-items: center;
+        margin: 10px auto 50px auto;
+        width: 100vw;
+    }
+  }
