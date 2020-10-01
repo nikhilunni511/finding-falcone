@@ -9,7 +9,7 @@ import {
   getSelectedVehicles,
   getTimeTaken
 } from './vehicleSlice';
-import {Error} from '../error'
+import { Error } from '../error';
 import { useHistory } from 'react-router-dom';
 import { getSelectedPlanets } from '../planets/planetSlice';
 import { Box } from '../box/box';
@@ -24,7 +24,7 @@ export function Vehicles() {
   const availableVehicles = useSelector(getAvailableVehicles) || {};
   const selectedVehicles = useSelector(getSelectedVehicles) || {};
   const timeTaken = useSelector(getTimeTaken) || 0;
-  const [hasError, setError] = useState(false)
+  const [hasError, setError] = useState(false);
   if (
     Object.keys(selectedPlanets).length === 0 &&
     selectedPlanets.constructor === Object
@@ -54,27 +54,31 @@ export function Vehicles() {
   };
   return (
     <div className="vehicle-container">
-      {hasError && <Error/>}
-      {!hasError && vehicles.length > 0 &&<><p>Choose the vehicles</p>
-      <p>Time taken : {timeTaken}</p>
-      <div className="box-container">
-        {Object.keys(selectedPlanets).map((planet, index) => (
-          <Box
-            key={index}
-            planet={selectedPlanets[planet]}
-            hasList={true}
-            options={availableVehicles}
-            enable={true}
-            onChange={onSelectVehicle}
-            selectedVehicles={selectedVehicles}
+      {hasError && <Error />}
+      {!hasError && vehicles.length > 0 && (
+        <>
+          <p>Choose the vehicles</p>
+          <p>Time taken : {timeTaken}</p>
+          <div className="box-container">
+            {Object.keys(selectedPlanets).map((planet, index) => (
+              <Box
+                key={index}
+                planet={selectedPlanets[planet]}
+                hasList={true}
+                options={availableVehicles}
+                enable={true}
+                onChange={onSelectVehicle}
+                selectedVehicles={selectedVehicles}
+              />
+            ))}
+          </div>
+          <Button
+            title={'Find falcone'}
+            nextRoute={'/find'}
+            disable={Object.keys(selectedVehicles).length < 4}
           />
-        ))}
-      </div>
-      <Button
-        title={'Find falcone'}
-        nextRoute={'/find'}
-        disable={Object.keys(selectedVehicles).length < 4}
-      /></>}
+        </>
+      )}
     </div>
   );
 }

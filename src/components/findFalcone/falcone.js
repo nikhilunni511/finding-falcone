@@ -5,7 +5,7 @@ import { getSelectedVehicles, getTimeTaken } from '../vehicles/vehicleSlice';
 import { getSelectedPlanets } from '../planets/planetSlice';
 import axios from 'axios';
 import { Button } from '../button/button';
-import {Error} from '../error'
+import { Error } from '../error';
 import './falcone.css';
 
 export function Falcone() {
@@ -83,10 +83,13 @@ export function Falcone() {
   }
   return (
     <>
-    {hasError && <Error/>}
-      {!hasError && <><div className="status-container">{message}</div>
-      <Button title={'Start again'} nextRoute={'/'} /></>
-      }
+      {hasError && <Error />}
+      {!hasError && (
+        <>
+          <div className="status-container">{message}</div>
+          <Button title={'Start again'} nextRoute={'/'} />
+        </>
+      )}
     </>
   );
 }
