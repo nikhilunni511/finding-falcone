@@ -18,7 +18,7 @@ export function Falcone() {
     Object.keys(selectedPlanets).length === 0 &&
     selectedPlanets.constructor === Object
   ) {
-    history.push('/planets');
+    history.push('/');
   }
 
   useEffect(() => {

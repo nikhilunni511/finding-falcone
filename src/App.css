@@ -1,14 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans&display=swap');
+
 .App {
   background-color: #ffffff;
   min-height: 100vh;
   text-align: center;
 }
 
-p{
+body{
   text-align: justify;
   text-overflow: ellipsis;
+  font-family: 'Open Sans', sans-serif;
 }
 
-.title{
+.title h1{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 28px;
   margin: 50px 0 0 0;
 }

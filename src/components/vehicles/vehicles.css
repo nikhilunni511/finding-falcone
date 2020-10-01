@@ -1,3 +1,7 @@
 .vehicle-container p{
     text-align: center;
 }
+
+.vehicle-container {
+    padding-bottom: 15px;
+}
