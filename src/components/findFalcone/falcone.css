@@ -1,0 +1,12 @@
+.status-container {
+    width: 65vh;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 800px) {
+    .status-container {
+        width: 90%;
+        margin: 0 auto;
+    }
+  }
+  
