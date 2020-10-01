@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 const initialState = {
   vehicles: [],
   availableVehicles: [],
   selectedVehicles: {},
   timeTaken: 0
 };
+
 export const counterSlice = createSlice({
   name: 'vehicles',
   initialState,

@@ -4,10 +4,10 @@ import { useHistory } from 'react-router-dom';
 import { getSelectedVehicles, getTimeTaken } from '../vehicles/vehicleSlice';
 import { getSelectedPlanets } from '../planets/planetSlice';
 import axios from 'axios';
-import './falcone.css';
 import { Button } from '../button/button';
 import {Error} from '../error'
 import './falcone.css';
+
 export function Falcone() {
   const [hasError, setError] = useState(false);
   const history = useHistory();

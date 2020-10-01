@@ -5,6 +5,7 @@ const initialState = {
   planets: [],
   selectedPlanets: {}
 };
+
 export const counterSlice = createSlice({
   name: 'planets',
   initialState,
