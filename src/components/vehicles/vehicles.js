@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import {
@@ -9,6 +9,7 @@ import {
   getSelectedVehicles,
   getTimeTaken
 } from './vehicleSlice';
+import {Error} from '../error'
 import { useHistory } from 'react-router-dom';
 import { getSelectedPlanets } from '../planets/planetSlice';
 import { Box } from '../box/box';
@@ -23,6 +24,7 @@ export function Vehicles() {
   const availableVehicles = useSelector(getAvailableVehicles) || {};
   const selectedVehicles = useSelector(getSelectedVehicles) || {};
   const timeTaken = useSelector(getTimeTaken) || 0;
+  const [hasError, setError] = useState(false)
   if (
     Object.keys(selectedPlanets).length === 0 &&
     selectedPlanets.constructor === Object
@@ -38,7 +40,7 @@ export function Vehicles() {
             dispatch(addVehicles(res.data));
           }
         })
-        .catch(() => console.log(1));
+        .catch(() => setError(true));
     }
   }, [selectedVehicles]);
   const onSelectVehicle = (vehicle, planet) => {
@@ -52,7 +54,8 @@ export function Vehicles() {
   };
   return (
     <div className="vehicle-container">
-      <p>Choose the vehicles</p>
+      {hasError && <Error/>}
+      {!hasError && vehicles.length > 0 &&<><p>Choose the vehicles</p>
       <p>Time taken : {timeTaken}</p>
       <div className="box-container">
         {Object.keys(selectedPlanets).map((planet, index) => (
@@ -71,7 +74,7 @@ export function Vehicles() {
         title={'Find falcone'}
         nextRoute={'/find'}
         disable={Object.keys(selectedVehicles).length < 4}
-      />
+      /></>}
     </div>
   );
 }

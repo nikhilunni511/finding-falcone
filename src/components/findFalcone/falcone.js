@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getSelectedVehicles, getTimeTaken } from '../vehicles/vehicleSlice';
 import { getSelectedPlanets } from '../planets/planetSlice';
 import axios from 'axios';
 import './falcone.css';
 import { Button } from '../button/button';
+import {Error} from '../error'
 import './falcone.css';
 export function Falcone() {
-  const [error, setError] = useState(false);
+  const [hasError, setError] = useState(false);
   const history = useHistory();
   const selectedPlanets = useSelector(getSelectedPlanets) || {};
   const selectedVehicles = useSelector(getSelectedVehicles) || {};
@@ -22,7 +23,7 @@ export function Falcone() {
   }
 
   useEffect(() => {
-    if (!falcone && !error)
+    if (!falcone && !hasError)
       axios
         .post(`https://findfalcone.herokuapp.com/token`, null, {
           headers: {
@@ -52,11 +53,11 @@ export function Falcone() {
                   setFalconeStatus(res.data);
                 }
               })
-              .catch((err) => setError(true));
+              .catch(() => setError(true));
           }
         })
-        .catch((err) => setError(true));
-  }, [error, falcone]);
+        .catch(() => setError(true));
+  }, [hasError, falcone]);
   let message = '';
   if (falcone?.status === 'success') {
     message = (
@@ -77,13 +78,15 @@ export function Falcone() {
       </div>
     );
   }
-  if (error) {
+  if (hasError) {
     message = 'Something went wrong!';
   }
   return (
-    <div>
-      <div className="status-container">{message}</div>
-      <Button title={'Start again'} nextRoute={'/'} />
-    </div>
+    <>
+    {hasError && <Error/>}
+      {!hasError && <><div className="status-container">{message}</div>
+      <Button title={'Start again'} nextRoute={'/'} /></>
+      }
+    </>
   );
 }

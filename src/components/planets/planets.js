@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   select,
@@ -8,6 +8,7 @@ import {
   getPlanets,
   getSelectedPlanets
 } from './planetSlice';
+import {Error} from '../error'
 import axios from 'axios';
 import { Box } from '../box/box';
 import { Button } from '../button/button';
@@ -18,13 +19,14 @@ export function Planets() {
   const selectedPlanets = useSelector(getSelectedPlanets);
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
+  const [hasError, setError] = useState(false)
   useEffect(() => {
     if (!planets.length) {
       axios.get(`https://findfalcone.herokuapp.com/planets`).then((res) => {
         if (res && res.data) {
           dispatch(addPlanets(res.data));
         }
-      });
+      }).catch(() => setError(true));
     }
   }, []);
   const handleClick = (planetId) => {
@@ -35,7 +37,8 @@ export function Planets() {
 
   return (
     <div className="planet-container">
-      <p>Select planets you want to search in</p>
+      {hasError && <Error/>}
+      {!hasError && planets.length > 0 && <><p>Select planets you want to search in</p>
       <div className="box-container">
         {planets.map((item, index) => (
           <Box
@@ -55,7 +58,7 @@ export function Planets() {
           nextRoute={'/vehicles'}
           disable={count < 4}
         />
-      )}
+      )}</>}
     </div>
   );
 }

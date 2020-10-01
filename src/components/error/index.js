@@ -1,13 +1,14 @@
 import React from 'react';
-import { Button } from '../button/button';
+import {Button} from '../button/button'
+import './error.css'
+export function Error(props) {
 
-export function Home() {
   return (
-    <div>
+    <div className="error-container">
       <div>
-        <h1>Something went wrong!</h1>
+        <p>Something went wrong!</p>
       </div>
-      <Button title={'Restart'} nextRoute={'/'} />
+      <Button title={'Restart'} nextRoute={'/'}/>
     </div>
   );
 }
