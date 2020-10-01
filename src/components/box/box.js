@@ -29,9 +29,7 @@ export function Box(props) {
       onClick={() => !props.hasList && props.onClick(props.id)}
     >
       <img src={require(`../../assets/planets/${props.planet.name}.png`)} />
-      <p>
-        {props.planet.name}({props.planet.distance})
-      </p>
+      <p>{props.planet.name}</p>
       {!!props.hasList && (
         <select onChange={handelChange} value={value}>
           <option value="default" disabled>
@@ -43,7 +41,7 @@ export function Box(props) {
                 props.options[item].total_no) ||
                 value === index) && (
                 <option key={index} value={item}>
-                  {props.options[item].name}({props.options[item].total_no})
+                  {props.options[item].name}
                 </option>
               )
             );
